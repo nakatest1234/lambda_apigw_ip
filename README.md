@@ -12,6 +12,7 @@ docker run --rm --env-file .env -v ${PWD}:/var/task:ro lambci/lambda:python3.8 t
 ## lambda env
 
 | name | example |
+| ---- | ------- |
 | SECURITY_GROUP_ID | sg-xxxxxxxxx |
 | ALLOW_NAMES | judgment Descriotion ex)naka-test1 |
 | ALLOW_PORTS | protocol:port ex)tcp:80, tcp:0 |
