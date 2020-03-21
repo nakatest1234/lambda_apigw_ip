@@ -17,3 +17,6 @@ docker run --rm --env-file .env -v ${PWD}:/var/task:ro lambci/lambda:python3.8 t
 | ALLOW_NAMES | judgment Descriotion ex)naka-test1 |
 | ALLOW_PORTS | protocol:port ex)tcp:80, tcp:0 |
 
+## ref
+
+- https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#securitygroup
