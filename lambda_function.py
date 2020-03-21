@@ -13,16 +13,16 @@ def lambda_handler(event, context):
 	if username is None or ip_addr is None:
 		return {
 			'isBase64Encoded': False,
-			'statusCode': 503,
-			'headers': {},
+			'statusCode': 400,
+			'headers': {"Content-Type":"text/plain"},
 			'body': 'no param',
 		}
 
 	if username not in ALLOW_NAMES:
 		return {
 			'isBase64Encoded': False,
-			'statusCode': 503,
-			'headers': {},
+			'statusCode': 400,
+			'headers': {"Content-Type":"text/plain"},
 			'body': 'no user',
 		}
 
@@ -34,7 +34,7 @@ def lambda_handler(event, context):
 		return {
 			'isBase64Encoded': False,
 			'statusCode': 503,
-			'headers': {},
+			'headers': {"Content-Type":"text/plain"},
 			'body': 'no role',
 		}
 
@@ -44,7 +44,7 @@ def lambda_handler(event, context):
 		return {
 			'isBase64Encoded': False,
 			'statusCode': 503,
-			'headers': {},
+			'headers': {"Content-Type":"text/plain"},
 			'body': 'no target',
 		}
 
@@ -99,12 +99,12 @@ def lambda_handler(event, context):
 			return {
 				'isBase64Encoded': False,
 				'statusCode': 200,
-				'headers': {},
+				'headers': {"Content-Type":"text/plain"},
 				'body': 'OK',
 			}
 	except Exception as e:
 		print('Exception:', e.args, file=sys.stderr)
-		errmsg = e.response
+		errmsg = e.response['Error']['Message']
 	except:
 		print('Unexpected error:', sys.exc_info()[0], file=sys.stderr)
 		errmsg = 'Unexpected error'
@@ -112,6 +112,6 @@ def lambda_handler(event, context):
 	return {
 		'isBase64Encoded': False,
 		'statusCode': 503,
-		'headers': {},
+		'headers': {"Content-Type":"text/plain"},
 		'body': errmsg,
 	}
