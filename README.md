@@ -20,3 +20,39 @@ docker run --rm --env-file .env -v ${PWD}:/var/task:ro lambci/lambda:python3.8 t
 ## ref
 
 - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#securitygroup
+
+## policy example
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:RevokeSecurityGroupIngress"
+            ],
+            "Resource": [
+                "arn:aws:ec2:ap-northeast-1:123456789012:security-group/sg-01234567890123456"
+            ],
+            "Condition": {
+                "ArnEquals": {
+                    "ec2:Vpc": "arn:aws:ec2:*:*:vpc/vpc-01234567890123456"
+                }
+            }
+        },
+        {
+            "Action": [
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSecurityGroupReferences",
+                "ec2:DescribeStaleSecurityGroups",
+                "ec2:DescribeVpcs"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
